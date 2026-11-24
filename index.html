@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <title>智慧物流仓储中控平台</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="scene"></canvas>
+
+      <header class="topbar">
+        <div class="top-left">
+          <span class="weather">晴 18°C</span>
+          <span class="tag">仓库编号 WH-01</span>
+        </div>
+        <h1>智慧物流仓储中控平台</h1>
+        <div class="top-right">
+          <span id="clock">--:--:--</span>
+          <span id="date">----</span>
+        </div>
+      </header>
+
+      <aside class="panel left">
+        <section class="card">
+          <h2>今日运营概览</h2>
+          <div class="kpis">
+            <div class="kpi"><b id="kpi-in">0</b><span>今日入库(件)</span></div>
+            <div class="kpi"><b id="kpi-out">0</b><span>今日出库(件)</span></div>
+            <div class="kpi"><b id="kpi-stock">0</b><span>当前库存(件)</span></div>
+            <div class="kpi"><b id="kpi-rate">0%</b><span>库位利用率</span></div>
+          </div>
+        </section>
+        <section class="card">
+          <h2>近 7 日出入库趋势</h2>
+          <div class="chart" id="chart-trend"></div>
+        </section>
+        <section class="card">
+          <h2>库存品类占比</h2>
+          <div class="chart" id="chart-category"></div>
+        </section>
+      </aside>
+
+      <aside class="panel right">
+        <section class="card">
+          <h2>设备运行状态</h2>
+          <div class="chart small" id="chart-device"></div>
+          <ul class="devices" id="device-list"></ul>
+        </section>
+        <section class="card">
+          <h2>各库区容量</h2>
+          <div class="chart" id="chart-zone"></div>
+        </section>
+        <section class="card">
+          <h2>实时任务</h2>
+          <ul class="tasks" id="task-list"></ul>
+        </section>
+      </aside>
+
+      <footer class="bottombar">
+        <button class="view-btn active" data-view="overview">全景视角</button>
+        <button class="view-btn" data-view="top">俯视视角</button>
+        <button class="view-btn" data-view="dock">月台视角</button>
+        <button class="view-btn" id="btn-rotate">自动旋转</button>
+      </footer>
+
+      <div class="tooltip" id="tooltip"></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

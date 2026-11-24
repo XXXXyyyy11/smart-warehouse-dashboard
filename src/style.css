@@ -1,0 +1,102 @@
+:root {
+  --blue: #1677ff;
+  --blue-light: #4fa3ff;
+  --cyan: #36cfff;
+  --text: #0b2a4a;
+  --sub: #5a7a9a;
+  --card: rgba(255, 255, 255, 0.72);
+  --border: rgba(22, 119, 255, 0.25);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #app { width: 100%; height: 100%; overflow: hidden; }
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #eaf4ff 0%, #d6e9ff 100%);
+}
+#scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; z-index: 2;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.55));
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(22, 119, 255, 0.12);
+}
+.topbar h1 {
+  font-size: 30px; letter-spacing: 6px; font-weight: 700;
+  background: linear-gradient(90deg, #0a5bd8, #36cfff);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.top-left, .top-right { display: flex; gap: 16px; font-size: 14px; color: var(--sub); width: 280px; }
+.top-right { justify-content: flex-end; }
+#clock { font-family: Consolas, monospace; font-size: 20px; color: var(--blue); }
+.tag { padding: 2px 10px; border: 1px solid var(--border); border-radius: 4px; color: var(--blue); }
+
+.panel {
+  position: absolute; top: 88px; bottom: 76px; width: 360px; z-index: 2;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.panel.left { left: 20px; }
+.panel.right { right: 20px; }
+.card {
+  flex: 1; min-height: 0; display: flex; flex-direction: column;
+  padding: 12px 14px; border-radius: 10px;
+  background: var(--card); backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 24px rgba(22, 119, 255, 0.12);
+  position: relative;
+}
+.card::before {
+  content: ""; position: absolute; left: 0; top: 14px; width: 4px; height: 18px;
+  background: linear-gradient(180deg, var(--blue), var(--cyan)); border-radius: 0 2px 2px 0;
+}
+.card h2 { font-size: 16px; padding-left: 6px; margin-bottom: 8px; color: #0a4fb8; }
+.chart { flex: 1; min-height: 0; }
+.chart.small { flex: 0 0 110px; }
+
+.kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: 1; }
+.kpi {
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  border-radius: 8px; background: linear-gradient(135deg, rgba(22,119,255,0.08), rgba(54,207,255,0.12));
+  border: 1px solid var(--border);
+}
+.kpi b { font-size: 26px; color: var(--blue); font-family: Consolas, monospace; }
+.kpi span { font-size: 12px; color: var(--sub); margin-top: 4px; }
+
+.devices, .tasks { list-style: none; font-size: 13px; overflow: hidden; }
+.devices li, .tasks li {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 4px; border-bottom: 1px dashed rgba(22,119,255,0.18);
+}
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.dot.run { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+.dot.idle { background: var(--blue-light); }
+.dot.warn { background: #f59e0b; box-shadow: 0 0 6px #f59e0b; }
+.tasks { flex: 1; }
+.tasks li { animation: slideIn 0.5s ease; }
+.tasks .type { color: var(--blue); font-weight: 600; margin-right: 6px; }
+.tasks time { color: var(--sub); font-family: Consolas, monospace; }
+@keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: none; } }
+
+.bottombar {
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 12px; z-index: 2;
+}
+.view-btn {
+  padding: 8px 20px; font-size: 14px; cursor: pointer; color: var(--blue);
+  background: rgba(255,255,255,0.85); border: 1px solid var(--border); border-radius: 18px;
+  transition: all 0.2s;
+}
+.view-btn:hover, .view-btn.active {
+  color: #fff; background: linear-gradient(90deg, var(--blue), var(--cyan));
+  box-shadow: 0 4px 14px rgba(22,119,255,0.35);
+}
+.tooltip {
+  position: absolute; z-index: 3; pointer-events: none; display: none;
+  padding: 8px 12px; font-size: 13px; line-height: 1.7; border-radius: 6px;
+  background: rgba(255,255,255,0.95); border: 1px solid var(--blue-light);
+  box-shadow: 0 4px 16px rgba(22,119,255,0.25);
+}
+.tooltip b { color: var(--blue); }
